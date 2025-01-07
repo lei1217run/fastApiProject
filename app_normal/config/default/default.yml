@@ -1,0 +1,5 @@
+app:
+  title: "A post Service"
+  description: "Post Management Service API"
+  version: "0.0.1"
+  debug: true
