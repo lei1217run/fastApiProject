@@ -3,3 +3,10 @@ app:
   description: "Post Management Service API"
   version: "0.0.2"
   debug: true
+
+database:
+  mysql:
+    host: mysql
+    user: test
+    password: test
+    dbname: fastapi

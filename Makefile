@@ -2,7 +2,7 @@ DOCKER_COMPOSE = sudo docker compose -f ./docker/docker-compose.yml -p project
 
 .PHONY: build
 build:
-	${DOCKER_COMPOSE} build app
+	${DOCKER_COMPOSE} build --no-cache app
 
 .PHONY: up
 up: build

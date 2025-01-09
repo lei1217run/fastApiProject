@@ -1,6 +1,6 @@
 from fastapi import APIRouter, status, HTTPException
 
-from app.domain.exceptions import PostNotFound, UserNotFound, Forbidden
+from app.domain.exceptions import PostNotFound, UserNotFound, Forbidden, ValidateFieldValue
 from app.entrypoint.fastapi.schema.posts import Post, PostCreate, PostUpdate
 from app.entrypoint.fastapi.schema.user import User
 
@@ -77,7 +77,7 @@ async def create_post(input_post: PostCreate) -> Post:
             user_id=input_post.user_id,
             title=input_post.title)
         return to_post_view_model(post)
-    except UserNotFound as e:
+    except (UserNotFound, ValidateFieldValue) as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=str(e)
@@ -101,6 +101,11 @@ async def update_post(post_id: int, input_post: PostUpdate) -> Post:
     except (UserNotFound, PostNotFound) as e:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
+            detail=str(e)
+        )
+    except ValidateFieldValue as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
             detail=str(e)
         )
     except Forbidden as e:

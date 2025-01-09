@@ -3,7 +3,7 @@ from typing import AsyncIterator
 
 from fastapi import FastAPI
 
-from app.application import application_startup
+from app.application import application_startup, application_shutdown
 from app.config.config import config
 from app.entrypoint.fastapi import routers
 
@@ -16,6 +16,7 @@ def create_app() -> FastAPI:
 
     async def app_shutdown(application: FastAPI) -> None:
         print("App shutting down.")
+        await application_shutdown()
 
     @asynccontextmanager
     async def lifespan(application: FastAPI) -> AsyncIterator[None]:
