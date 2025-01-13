@@ -3,7 +3,7 @@ from app.application.post_service import PostService
 from app.config.config import config
 from app.infrastructure.persistences.memory_db.database import database
 from app.infrastructure.persistences.mysql.database import Database
-from app.infrastructure.repositories import MemoryUserRepository, MySQLPostRepository
+from app.infrastructure.repositories import MemoryUserRepository, MySQLPostRepository, LoggerManager
 
 """
     应用的生命周期函数
@@ -27,9 +27,11 @@ async def application_startup():
     post_repository = MySQLPostRepository(database=mysql_database)
     # post_repository = MemoryPostRepository(database=database)
 
+    DIC.logger_manager = LoggerManager(name="application")
+
     DIC.post_service = PostService(
         user_repository=user_repository,
-        post_repository=post_repository)
+        post_repository=post_repository,)
 
     DIC.mysql_database = mysql_database
 

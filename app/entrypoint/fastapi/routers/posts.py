@@ -52,19 +52,8 @@ async def list_posts() -> list[Post]:
             response_model=Post,
             status_code=status.HTTP_200_OK)
 async def get_post(post_id: int) -> Post:
-    try:
-        post: PostModel = await DIC.post_service.get_post(post_id)
-        return to_post_view_model(post)
-    except (PostNotFound, UserNotFound) as e:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=str(e)
-        )
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL,
-            detail=str(e)
-        )
+    post: PostModel = await DIC.post_service.get_post(post_id)
+    return to_post_view_model(post)
 
 
 @router.post("",
@@ -72,21 +61,10 @@ async def get_post(post_id: int) -> Post:
              response_model=Post,
              status_code=status.HTTP_201_CREATED)
 async def create_post(input_post: PostCreate) -> Post:
-    try:
-        post: PostModel = await DIC.post_service.create_post(
-            user_id=input_post.user_id,
-            title=input_post.title)
-        return to_post_view_model(post)
-    except (UserNotFound, ValidateFieldValue) as e:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=str(e)
-        )
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL,
-            detail=str(e)
-        )
+    post: PostModel = await DIC.post_service.create_post(
+        user_id=input_post.user_id,
+        title=input_post.title)
+    return to_post_view_model(post)
 
 
 @router.patch("/{post_id}",
@@ -94,30 +72,9 @@ async def create_post(input_post: PostCreate) -> Post:
               response_model=Post,
               status_code=status.HTTP_200_OK)
 async def update_post(post_id: int, input_post: PostUpdate) -> Post:
-    try:
-        post: PostModel = await DIC.post_service.update_post(
-            user_id=input_post.user_id,post_id=post_id, title=input_post.title)
-        return to_post_view_model(post)
-    except (UserNotFound, PostNotFound) as e:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=str(e)
-        )
-    except ValidateFieldValue as e:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=str(e)
-        )
-    except Forbidden as e:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail=str(e)
-        )
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL,
-            detail=str(e)
-        )
+    post: PostModel = await DIC.post_service.update_post(
+        user_id=input_post.user_id, post_id=post_id, title=input_post.title)
+    return to_post_view_model(post)
 
 
 @router.delete("/{post_id}",

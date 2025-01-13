@@ -11,7 +11,8 @@ from app.domain.repositories import PostRepository, UserRepository
 
 
 class PostService:
-    def __init__(self, post_repository: PostRepository, user_repository: UserRepository):
+    def __init__(self, post_repository: PostRepository,
+                 user_repository: UserRepository):
         self.post_repository = post_repository
         self.user_repository = user_repository
 

@@ -39,8 +39,8 @@ class MySQLPostRepository(PostRepository):
         async with self.connection_pool.acquire() as connection:
             async with connection.cursor() as cursor:
                 await cursor.execute(
-                    query=f"UPDATE posts SET {','.join([f'`{key}` = %s' for key in modified_fields.keys()])} where post_id = {post.post_id}",
-                    args=tuple(modified_fields.values()),
+                    query=f"UPDATE posts SET {','.join([f'`{key}` = %s' for key in modified_fields.keys()])} where post_id = %s",
+                    args=tuple(modified_fields.values()) + (post.post_id,),
                 )
         return post
 
