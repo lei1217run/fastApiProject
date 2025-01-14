@@ -3,6 +3,13 @@ app:
   description: "Post Management Service API"
   version: "0.0.2"
   debug: true
+  log:
+    level: "info"
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    file_name: "app.log"
+    file_path: ""
+    enable_file_logging: true
+    detailed_mode: false  # 是否记录详细日志
 
 database:
   mysql:

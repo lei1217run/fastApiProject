@@ -1,9 +1,11 @@
 from fastapi import APIRouter, status, HTTPException
-from app.infrastructure.persistences.memory_db.database import database
-from app.entrypoint.fastapi.schema.posts import Post, PostCreate, PostUpdate
-from app.entrypoint.fastapi.schema import User
+
 
 __all__ = ("router",)
+
+from normal.database import database
+from normal.schema.posts import PostCreate, PostUpdate, Post
+from normal.schema.user import User
 
 router = APIRouter(
     prefix="/posts",

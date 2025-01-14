@@ -1,6 +1,7 @@
 from datetime import datetime
 from pydantic import BaseModel, Field
-from app.entrypoint.fastapi.schema import User
+
+from normal.schema.user import User
 
 
 class Post(BaseModel):

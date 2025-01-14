@@ -14,7 +14,7 @@ from app.infrastructure.logging.LoguruLogger import LoggerManager
 
 def create_app() -> FastAPI:
 
-    entry_logger = LoggerManager(name="entrypoint")
+    entry_logger = LoggerManager(name="entrypoint", log_config=config)
 
     #  生命周期钩子函数
     async def app_startup(application: FastAPI) -> None:
