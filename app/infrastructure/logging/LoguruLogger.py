@@ -1,11 +1,13 @@
 import json
+import os.path
 import sys
+from datetime import datetime
 
 from dynaconf import Dynaconf
 from loguru import logger
 
 from app.infrastructure.logging.base_logger import BaseLogger
-from app.config.config import config
+from app.infrastructure.utils.func_util import get_parent_path, make_dirs, replace_place_holder, resolve_placeholders
 
 
 # 屏蔽 uvicorn 日志
@@ -39,12 +41,24 @@ class LoggerManager(BaseLogger):
         """
         初始化配置信息。
 
+        :Todo
+            优化配置文件占位符替换逻辑，支持更多的占位符替换。
         Args:
             log_config: 配置信息。
         """
+
         assert log_config.app.log is not None, "log_config must be provided."
-        self.log_file = log_config.app.log.file_name if (
-            log_config.app.log.file_name) else None
+        # Todo: 这里有一坨shit,需要优化
+        _log_file = None
+        if log_config.ROOT_PATH_FOR_DYNACONF:
+            root_path = get_parent_path(log_config.ROOT_PATH_FOR_DYNACONF)
+            logs_path = "" if not log_config.app.log.file_path \
+                else os.path.join(root_path, log_config.app.log.file_path)
+            make_dirs(logs_path)
+            if log_config.app.log.file_name:
+                _log_file = resolve_placeholders(os.path.join(logs_path, log_config.app.log.file_name))
+        self.log_file = _log_file if (
+            _log_file) else None
         self.is_detail_model = log_config.app.log.detailed_mode if (
             log_config.app.log.detailed_mode) else False
         self.enable_file_logging = log_config.app.log.enable_file_logging if (
@@ -127,6 +141,6 @@ class LoggerManager(BaseLogger):
 
 intercept_uvicorn_logs()
 
-# logger1 = LoggerManager(name="hello")
-# logger1.bind_context(request_id=1)
-# logger1.log("hello world")
+# from app.config.config import config
+#
+# log1 = LoggerManager(log_config=config)

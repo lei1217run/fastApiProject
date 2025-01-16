@@ -6,14 +6,7 @@ app:
   log:
     level: "info"
     format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-    file_name: "app.log"
-    file_path: ""
+    file_name: "app_{{date}}.log"
+    file_path: "logs"
     enable_file_logging: true
     detailed_mode: false  # 是否记录详细日志
-
-database:
-  mysql:
-    host: mysql
-    user: test
-    password: test
-    dbname: fastapi

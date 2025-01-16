@@ -6,7 +6,7 @@ build:
 
 .PHONY: up
 up: build
-	${DOCKER_COMPOSE} up --attach app
+	APP_ENV=$(APP_ENV) ${DOCKER_COMPOSE} up --attach app
 
 .PHONY: down
 down: build

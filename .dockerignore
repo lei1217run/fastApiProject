@@ -20,3 +20,5 @@ venv/
 
 # PEP 582
 __pypackages__/
+
+*.log

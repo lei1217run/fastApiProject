@@ -1,0 +1,6 @@
+database:
+  mysql:
+    host: mysql
+    user: test
+    password: test
+    dbname: fastapi
