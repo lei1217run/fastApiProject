@@ -1,0 +1,6 @@
+FROM mysql:8.0.40
+
+ENV MYSQL_USER test
+ENV MYSQL_PASSWORD test
+ENV MYSQL_ROOT_PASSWORD rootpassword
+ENV MYSQL_DATABASE metrics_platform

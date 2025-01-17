@@ -4,6 +4,10 @@ from typing import ClassVar, Any, Self
 
 from psygnal import EmissionInfo, SignalGroupDescriptor
 
+from sqlalchemy.orm import declarative_base
+
+BaseEntity = declarative_base()
+
 
 @dataclass
 class BaseModel:

@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0.40
+    container_name: mysql_service
+    ports:
+      - "3307:3306" # 将容器端口3306映射到主机端口3307
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456 # Root用户密码
+      MYSQL_PASSWORD: 123456      # 用户密码
+      MYSQL_DATABASE: metrics_platform     # 默认数据库
+    volumes:
+      - /var/lib/mysql       # 数据库持久化存储
+    command: ["mysqld", "--lower_case_table_names=1"] # 配置大小写不敏感
+    restart: always                 # 容器崩溃后自动重启
+    networks:
+      - db_network
+
+networks:
+  db_network:
+    driver: bridge
