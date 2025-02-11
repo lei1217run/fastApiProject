@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 
 from app.domain.models.post import Post
+from app.infrastructure.utils.decorators import injectable
 
 """
     领域层-抽象层
@@ -8,6 +9,7 @@ from app.domain.models.post import Post
 """
 
 
+@injectable(name="PostRepositoryEntity")
 class PostRepository(ABC):
 
     @abstractmethod

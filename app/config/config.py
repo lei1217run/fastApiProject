@@ -13,7 +13,7 @@ def read_files(file_path: str) -> list:
     return glob.glob(file_path, root_dir=ROOT_DIR)
 
 
-# os.environ["APP_ENV"] = "development"
+os.environ["APP_ENV"] = "development"
 
 confs = read_files("default/*.yml")
 confs = [f for f in confs if f.endswith("default.yml") or f.endswith(f"{os.getenv('APP_ENV')}.yml")]

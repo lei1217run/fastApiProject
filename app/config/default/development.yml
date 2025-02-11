@@ -1,6 +1,7 @@
 database:
   mysql:
-    host: mysql
+    host: 127.0.0.1
     user: test
     password: test
-    dbname: fastapi
+    dbname: insight_dimension
+    port: 3307

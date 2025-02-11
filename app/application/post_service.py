@@ -8,8 +8,10 @@
 from app.domain.exceptions import UserNotFound, PostNotFound, Forbidden
 from app.domain.models.post import Post
 from app.domain.repositories import PostRepository, UserRepository
+from app.infrastructure.utils.decorators import injectable
 
 
+# @injectable(name="PostService")
 class PostService:
     def __init__(self, post_repository: PostRepository,
                  user_repository: UserRepository):

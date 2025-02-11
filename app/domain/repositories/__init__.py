@@ -9,3 +9,4 @@
 """
 from app.domain.repositories.post import PostRepository
 from app.domain.repositories.user import UserRepository
+from app.domain.repositories.codes import CodesRepository

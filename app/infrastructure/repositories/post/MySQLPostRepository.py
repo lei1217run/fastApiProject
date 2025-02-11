@@ -2,8 +2,10 @@ from app.domain.models.post import Post
 from app.domain.models.user import User
 from app.domain.repositories import PostRepository
 from app.infrastructure.persistences.mysql.database import Database
+from app.infrastructure.utils.decorators import injectable
 
 
+# @injectable(name="PostRepository")
 class MySQLPostRepository(PostRepository):
     def __init__(self, database: Database) -> None:
         self.connection_pool = database.pool

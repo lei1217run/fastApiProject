@@ -11,7 +11,7 @@ class Codes(BaseEntity):
     abbrev = Column(String(100))
     code_value = Column(String(100))
     code_name = Column(String(100))
-    parent_code_value = Column(String(100))
+    parent_code_id = Column(Integer)
     status = Column(Integer)
     is_modifier = Column(Integer)
     created_at = Column(DateTime)
@@ -25,7 +25,7 @@ class Codes(BaseEntity):
                 f"abbrev={self.abbrev}, "
                 f"code_value={self.code_value}, "
                 f"code_name={self.code_name}, "
-                f"parent_code_value={self.parent_code_value}, "
+                f"parent_code_id={self.parent_code_id}, "
                 f"status={self.status}, "
                 f"is_modifier={self.is_modifier}, "
                 f"created_at={self.created_at}, "

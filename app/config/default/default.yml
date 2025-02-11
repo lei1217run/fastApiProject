@@ -10,3 +10,8 @@ app:
     file_path: "logs"
     enable_file_logging: true
     detailed_mode: false  # 是否记录详细日志
+
+injection:
+  packages:
+    - "app.application"
+    - "app.infrastructure"

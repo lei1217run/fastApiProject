@@ -1,23 +1,15 @@
 """
     自定义依赖注入容器
-    先用dataclass 模拟dic
+    1. 先用dataclass 模拟dic
+    2. 引入依赖注入包之后直接初始值为None
 """
-
-from dataclasses import dataclass
-
-from app.application.post_service import PostService
-from app.infrastructure.logging.base_logger import BaseLogger
-from app.infrastructure.persistences.mysql.database import Database
-
 
 __all__ = ("DIC",)
 
+DIC = None # type: # AppContainer
 
-@dataclass(kw_only=True)
-class DependencyInjectionContainer:
-    post_service: PostService | None = None
-    mysql_database: Database | None = None
-    logger_manager: BaseLogger | None = None
-
-
-DIC = DependencyInjectionContainer()
+# @dataclass(kw_only=True)
+# class DependencyInjectionContainer:
+#     post_service: PostService | None = None
+#     mysql_database: Database | None = None
+#     logger_manager: BaseLogger | None = None

@@ -4,3 +4,4 @@ database:
     user: test
     password: test
     dbname: fastapi
+    port: 3307

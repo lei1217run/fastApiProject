@@ -9,3 +9,4 @@ starlette==0.37.2
 SQLAlchemy==2.0.37
 greenlet==3.1.1
 asyncmy==0.2.10
+dependency-injector==4.45.0
